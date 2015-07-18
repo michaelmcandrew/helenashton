@@ -85,7 +85,7 @@ function fonts_com_get_all_fonts($start = 0, $limit = 100, $filters = array()) {
   } // if
   else {
 
-    drupal_set_message(t('There was an error importing a font list from Fonts.com.'), 'error');
+    drupal_set_message(t('There was an error importing a font list from Fonts.com. Check !configuration.', array('!configuration' => l(t('configuration'), 'admin/config/user-interface/fontyourface/fonts_com'))), 'error');
     fontyourface_log('Invalid drupal_http_request response: @response', array('@response' => print_r($response, TRUE)));
 
   } // else
@@ -110,7 +110,7 @@ function fonts_com_get_all_fonts_count() {
 
   } // if
 
-  drupal_set_message(t('There was an error importing the font count from Fonts.com.'), 'error');
+  drupal_set_message(t('There was an error importing the font count from Fonts.com. Check !configuration.', array('!configuration' => l(t('configuration'), 'admin/config/user-interface/fontyourface/fonts_com'))), 'error');
   fontyourface_log('Invalid drupal_http_request response: @response', array('@response' => print_r($response, TRUE)));
 
   return FALSE;
@@ -374,7 +374,7 @@ function fonts_com_get_projects() {
   } // if
   else {
 
-    drupal_set_message(t('There was an error importing project list from Fonts.com.'), 'error');
+    drupal_set_message(t('There was an error importing project list from Fonts.com. Check !configuration.', array('!configuration' => l(t('configuration'), 'admin/config/user-interface/fontyourface/fonts_com'))), 'error');
     fontyourface_log('Invalid drupal_http_request response: @response', array('@response' => print_r($response, TRUE)));
 
   } // else
@@ -510,7 +510,7 @@ function fonts_com_delete_font_from_project($font_id, $project_id) {
 function fonts_com_set_font_selector($project_id, $font_id, $selector) {
 
   fonts_com_add_selector_to_project($project_id, $selector);
-  $project_selectors = fonts_get_selectors_in_project($project_id);
+  $project_selectors = fonts_com_get_selectors_in_project($project_id);
   $selector_id = FALSE;
 
   foreach ($project_selectors as $project_selector) {
@@ -622,7 +622,7 @@ function fonts_com_add_selector_to_project($project_id, $selector) {
 /**
  * Gets selectors in project.
  */
-function fonts_get_selectors_in_project($project_id) {
+function fonts_com_get_selectors_in_project($project_id) {
 
   $selectors = array();
 
@@ -655,12 +655,12 @@ function fonts_get_selectors_in_project($project_id) {
 
   return $selectors;
 
-} // fonts_com_add_selector_to_project
+} // fonts_com_get_selectors_in_project
 
 /**
  * Gets choices for filter.
  */
-function fonts_get_filter_choices($filter) {
+function fonts_com_get_filter_choices($filter) {
 
   $choices = array();
 
@@ -686,19 +686,19 @@ function fonts_get_filter_choices($filter) {
   } // if
   else {
 
-    drupal_set_message(t('There was an error getting filter choices from Fonts.com.'), 'error');
+    drupal_set_message(t('There was an error getting filter choices from Fonts.com. Check !configuration.', array('!configuration' => l(t('configuration'), 'admin/config/user-interface/fontyourface/fonts_com'))), 'error');
     fontyourface_log('Invalid drupal_http_request response: @response', array('@response' => print_r($response, TRUE)));
 
   } // else
 
   return $choices;
 
-} // fonts_get_filter_choices
+} // fonts_com_get_filter_choices
 
 /**
  * Gets choices for all filter given current values.
  */
-function fonts_get_all_filter_choices($current_filters) {
+function fonts_com_get_all_filter_choices($current_filters) {
 
   $path = '/rest/json/AllFilterValues/?' . drupal_http_build_query($current_filters);
 
@@ -733,7 +733,7 @@ function fonts_get_all_filter_choices($current_filters) {
     } // if
     else {
 
-      drupal_set_message(t('There was an error getting filter choices from Fonts.com.'), 'error');
+      drupal_set_message(t('There was an error getting filter choices from Fonts.com. Check !configuration.', array('!configuration' => l(t('configuration'), 'admin/config/user-interface/fontyourface/fonts_com'))), 'error');
       fontyourface_log('Invalid drupal_http_request response: @response', array('@response' => print_r($response, TRUE)));
 
     } // else
@@ -741,12 +741,14 @@ function fonts_get_all_filter_choices($current_filters) {
   } // if
   else {
 
-    drupal_set_message(t('There was an error getting filter choices from Fonts.com.'), 'error');
+    drupal_set_message(t('There was an error getting filter choices from Fonts.com. Check !configuration.', array('!configuration' => l(t('configuration'), 'admin/config/user-interface/fontyourface/fonts_com'))), 'error');
     fontyourface_log('Invalid drupal_http_request response: @response', array('@response' => print_r($response, TRUE)));
 
   } // else
 
-} // fonts_get_all_filter_choices
+  return array();
+
+} // fonts_com_get_all_filter_choices
 
 /**
  * Publishes changes.
@@ -772,7 +774,7 @@ function fonts_com_api_headers($path) {
   $fonts_com_token = variable_get('fonts_com_token', '');
 
   if (empty($fonts_com_token)) {
-    return;
+    return array();
   } // if
 
   list($public_key, $private_key) = explode('--', $fonts_com_token);
