@@ -1,0 +1,139 @@
+// main: style.less
+/**
+ * Variable Overrides.
+ *
+ * Modify this file to override the Bootstrap Framework variables. You can copy
+ * these variables directly from ../bootstrap/less/variables.less to this file.
+ */
+
+// Set the proper directory for the Bootstrap Glyphicon font.
+@icon-font-path: '../bootstrap/fonts/';
+
+@helengreen:         #84c3c4;
+@helendarkgreen:     #236868;
+@helenpink:         #ce5c7f;
+@helenyellow:       #edb347;
+@helenwhite:       #fdfdf9;
+@helengrey:       #f9f9f8;
+
+
+@brand-primary:         @helengreen;
+@brand-success:         @helenpink;
+@brand-info:            @helenyellow;
+
+@navbar-default-color:             @helengreen;
+@navbar-default-bg:                @helengrey;
+@navbar-default-border:            @navbar-default-bg;
+@navbar-default-link-color:                @helengreen;
+@navbar-default-link-hover-color:         darken(@link-color, 15%);
+@navbar-default-link-active-color:         @navbar-default-link-hover-color;
+@navbar-default-link-active-bg:transparent;
+
+@headings-font-family:    "Cabin Sketch";
+@headings-color:          @helenpink;
+@link-hover-decoration: none;
+body {
+  background-color: @helengrey;
+}
+img {
+  border: 1px solid #e6e4de;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 0.5em;
+}
+.media {
+  float: left;
+  width: auto;
+  margin-top: 0;
+}
+.region-content footer {
+  display: none;
+}
+.navbar-header {
+  float: none;
+  text-align: center;
+  .lead {
+    font-size: @font-size-h2;
+    font-family: @headings-font-family;
+    color: @helenyellow;
+  }
+  .navbar-toggle {
+    margin: auto;
+    float: none;
+  }
+  .navbar-toggle:hover {
+    background-color: @helendarkgreen;
+    .icon-bar {
+      background-color: @helenwhite;
+    }  
+  }
+}
+.navbar-collapse {
+  font-family: @headings-font-family;
+  text-align: center;
+  .navbar-nav li {
+    font-size: @font-size-h3;
+  }
+}
+@media (min-width: @screen-sm-min) {
+  .navbar-collapse {
+    .menu {
+      float: none;
+      width: 100%;
+    }
+    .navbar-nav li {
+      float: none;
+    }
+    .nav li {
+      display: inline-block;
+    }
+  }
+}
+.navbar-brand {
+  font-family: @headings-font-family;
+  color: @helenpink!important;
+  font-size: 60px;
+  text-align: center;
+  width: 100%;
+  margin-left: 0!important;
+  margin-top: 20px;
+}
+.main-container .container {
+  background-color: @helenwhite;
+  padding: 20px;
+  border: 3px solid @helengreen;
+}
+.footer {
+  background-color: @helengreen;
+  border-style: none!important;
+  a {
+    color: @helendarkgreen;
+  }
+  #block-block-5 {
+    margin: 40px 0;
+  }
+}
+.article-content img {
+    border: 1px solid #e6e4de;
+    padding: 0.5em;
+}
+.node-blog .field-type-image {
+  margin: 4px 0 0 15px;
+  float: right;
+}
+.field-type-taxonomy-term-reference .field-item {
+  display: inline;
+  font-style: italic;
+  margin-right: 5px;
+}
+
+/* Small devices (tablets, 768px and up) */
+    // @media (min-width: @screen-sm-min) {
+    //     .navbar-header {
+    //         position: absolute;
+    //         top: 0;
+    //     }
+    //     .menu {
+    //         margin-top: 30px; // Depends on the size of the slogan div
+    //     }
+    // }
